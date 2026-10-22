@@ -20,7 +20,7 @@
   class="bg-mamo-white dark:bg-mamo-black font-poppins text-mamo-black dark:text-mamo-white transition-colors duration-300">
   <!-- Start Header -->
   <header
-    class="border-mamo-gold bg-mamo-white dark:bg-mamo-black sticky top-0 z-50 border-be-2 transition-all duration-600">
+    class="border-mamo-gold bg-mamo-white dark:bg-mamo-black sticky top-0 z-50 border-be-2 transition-all duration-300">
     <div
       class="relative mx-auto flex h-15 max-w-93.75 items-center justify-between gap-7 px-5 md:max-w-191.25 lg:h-19 lg:max-w-250 lg:gap-5 xl:max-w-375 xl:px-15">
       <a href="#" id="logo" class="mbe-0.8 me-auto hover:opacity-75 bg-mamo-black dark:bg-transparent rounded-lg p-1">
@@ -28,36 +28,40 @@
       </a>
 
       <nav
-        class="bg-mamo-white lg:dark:bg-transparent dark:bg-mamo-black border-mamo-gold absolute top-full left-0 z-30 mx-auto flex max-h-0 w-full flex-col items-center justify-between gap-2.5 overflow-hidden rounded-b-2xl border-x-2 border-be-2 px-5 font-bold transition-all duration-600 lg:static lg:top-auto lg:left-auto lg:z-0 lg:m-0 lg:me-5 lg:h-full lg:max-h-full lg:w-auto lg:translate-none lg:flex-row lg:rounded-b-none lg:border-none lg:bg-transparent lg:p-0">
+        class="bg-mamo-white lg:dark:bg-transparent dark:bg-mamo-black border-mamo-gold absolute top-full z-30 max-h-0 w-[calc(100%-40px)] mx-auto gap-2.5 overflow-hidden rounded-b-2xl border-x-2 border-be-2 px-5 font-bold transition-all duration-300 lg:static lg:top-auto lg:left-auto lg:z-0 lg:m-0 lg:me-5 lg:h-full lg:max-h-full lg:w-auto lg:translate-none lg:flex-row lg:rounded-b-none lg:border-none lg:bg-transparent lg:p-0">
         <ul
           class="mbe-2 h-full w-full uppercase md:text-xl lg:me-10 lg:mbe-0 lg:flex lg:items-center lg:justify-end lg:gap-6 xl:gap-10">
           <li class="nav-link">
-            <a href="#" class="nav-layout">Home</a>
+            <a href="#" class="nav-layout"><i class="fa-solid fa-house"></i>Home</a>
           </li>
           <li class="nav-link">
-            <a href="#about" class="nav-layout">About</a>
+            <a href="#about" class="nav-layout"><i class="fa-solid fa-circle-user"></i>About</a>
           </li>
           <li class="nav-link">
-            <a href="#subjects" class="nav-layout">Subjects</a>
+            <a href="#subjects" class="nav-layout"><i class="fa-solid fa-book"></i>Subjects</a>
           </li>
           <li class="nav-link">
-            <a href="#pricing" class="nav-layout">Pricing</a>
+            <a href="#pricing" class="nav-layout"><i class="fa-solid fa-dollar-sign"></i>Pricing</a>
           </li>
           <li class="nav-link">
-            <a href="#reviews" class="nav-layout">Reviews</a>
+            <a href="#reviews" class="nav-layout"><i class="fa-solid fa-comment"></i>Reviews</a>
           </li>
           <li class="nav-link">
-            <a href="#faq" class="nav-layout">FAQ</a>
+            <a href="#faq" class="nav-layout"><i class="fa-solid fa-circle-question"></i>FAQ</a>
           </li>
         </ul>
       </nav>
-      <button class="text-mamo-gold-deep dark:text-mamo-gold w-6.25 cursor-pointer text-lg font-bold" id="lang">
+      <button
+        class="hover:bg-mamo-gold/20 rounded-full p-2 text-mamo-gold-deep dark:text-mamo-gold text-lg font-bold hidden"
+        id="lang">
         AR
       </button>
-      <button class="text-mamo-gold-deep dark:text-mamo-gold cursor-pointer text-xl" id="theme">
+      <button
+        class="hover:bg-mamo-gold/20 rounded-full p-2 text-mamo-gold-deep dark:text-mamo-gold text-xl cursor-pointer"
+        id="theme">
         <i class="fa-solid fa-sun"></i>
       </button>
-      <button class="group relative flex cursor-pointer flex-col space-y-1.5 lg:hidden" id="burger-icon">
+      <button class="group relative flex cursor-pointer flex-col space-y-1.5 lg:hidden p-2" id="burger-icon">
         <span
           class="group-hover:bg-mamo-gold-deep dark:group-hover:bg-mamo-gold h-0.75 w-6.5 rounded-full bg-mamo-black transition-all duration-300 dark:bg-mamo-white"></span>
         <span
@@ -94,10 +98,10 @@
           </p>
           <div class="mbs-9 w-full font-bold md:flex md:w-100 md:gap-3">
             <a href="https://wa.me/201XXXXXXXXX?text=Hi, I'd like a free trial class"
-              class="bg-mamo-gold text-mamo-black hover:shadow-mamo-gold/50 mbe-4 block w-full rounded-full px-8 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg md:m-0 md:inline md:flex-1">Free
+              class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-transparent font-semibold transition-all duration-300 bg-mamo-gold text-mamo-black hover:border-mamo-gold hover:bg-mamo-gold/60 dark:hover:bg-mamo-gold/20 hover:text-mamo-gold-deep dark:hover:text-mamo-gold mbe-4 w-full px-8 py-3.5 text-base md:m-0 md:flex-1">Free
               Trial Class</a>
             <a href="#about"
-              class="text-mamo-gold-deep border-mamo-gold-deep dark:text-mamo-gold dark:border-mamo-gold hover:shadow-mamo-gold/50 hover:bg-mamo-gold block w-full rounded-full border-2 bg-transparent px-8 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:text-black hover:shadow-lg md:inline md:flex-1">Learn
+              class="inline-flex items-center justify-center gap-2 rounded-full border-2 font-semibold transition-all duration-300 text-mamo-gold-deep border-mamo-gold-deep bg-transparent dark:border-mamo-gold dark:text-mamo-gold w-full px-8 py-3.5 text-base md:flex-1 hover:bg-mamo-gold/60 dark:hover:bg-mamo-gold/20">Learn
               More</a>
           </div>
         </div>
@@ -116,7 +120,7 @@
         </div>
 
         <div class="text-center lg:max-w-[90%]">
-          <h2 class="section-title">About Ms. Mai Elnaggar</h2>
+          <h2 class="section-title"><i class="fa-solid fa-circle-user"></i>About Ms. Mai Elnaggar</h2>
           <p class="mbs-8 mbe-6 text-sm leading-[1.7] text-gray-600 dark:text-gray-400 lg:mbe-0 lg:text-base">
             With over 30 years of teaching experience at Narmer Language
             School, Ms. Mamo specializes in Science for primary and
@@ -154,31 +158,34 @@
     <!-- Start Subject -->
     <section id="subjects">
       <div class="mamo-container">
-        <h2 class="section-title">Subjects We Teach</h2>
+        <h2 class="section-title"><i class="fa-solid fa-book"></i>Subjects We Teach</h2>
 
         <div
-          class="mbs-8 space-y-6 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3 xl:grid-cols-[repeat(3,minmax(auto,290px))] xl:justify-center xl:gap-10">
+          class="mbs-8 space-y-6 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3 xl:grid-cols-[repeat(3,minmax(auto,350px))] xl:justify-center xl:gap-10">
           <div class="subject-card">
             <i class="fa-solid fa-microscope subject-icon"></i>
             <h3 class="subject-title">Primary Science</h3>
-            <p class="subject-text">Grades 4–6</p>
-            <a href="#pricing" class="subject-link">Learn More <i class="fa-solid fa-arrow-right"></i>
+            <p class="subject-text">Primary 4, 5 & 6</p>
+            <a href="#pricing" class="subject-link group">Learn More <i
+                class="fa-solid fa-arrow-right subject-link-arrow"></i>
             </a>
           </div>
 
           <div class="subject-card">
             <i class="fa-solid fa-vials subject-icon"></i>
             <h3 class="subject-title">Preparatory Science</h3>
-            <p class="subject-text">Grades 1–3</p>
-            <a href="#pricing" class="subject-link">Learn More <i class="fa-solid fa-arrow-right"></i>
+            <p class="subject-text">Preparatory 1, 2 & 3</p>
+            <a href="#pricing" class="subject-link group">Learn More <i
+                class="fa-solid fa-arrow-right subject-link-arrow"></i>
             </a>
           </div>
 
           <div class="subject-card md:col-span-2 lg:col-auto">
             <i class="fa-solid fa-dna subject-icon"></i>
-            <h3 class="subject-title">Secondary Biology</h3>
-            <p class="subject-text">Grade 1</p>
-            <a href="#pricing" class="subject-link">Learn More <i class="fa-solid fa-arrow-right"></i>
+            <h3 class="subject-title">Integated Science</h3>
+            <p class="subject-text">Secondary 1</p>
+            <a href="#pricing" class="subject-link group">Learn More <i
+                class="fa-solid fa-arrow-right subject-link-arrow"></i>
             </a>
           </div>
         </div>
@@ -188,7 +195,7 @@
     <!-- ٍStart Pricing -->
     <section id="pricing">
       <div class="mamo-container">
-        <h2 class="section-title">Pricing Plans</h2>
+        <h2 class="section-title"><i class="fa-solid fa-dollar-sign"></i>Pricing Plans</h2>
         <p class="mbs-1 mbe-8 text-center text-sm text-gray-600 dark:text-gray-400">
           Start with a free trial class
         </p>
@@ -196,7 +203,7 @@
         <div class="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 xl:grid-cols-4">
           <div class="pricing-card bg-mamo-gold">
             <h3 class="pricing-title text-mamo-black">
-              <i class="fa-solid fa-gift"></i> Free Trial
+              <i class="fa-solid fa-gift"></i>Free Trial
             </h3>
 
             <p class="pricing-detail text-mamo-black">
@@ -216,13 +223,13 @@
               </li>
             </ul>
             <a href="https://wa.me/201XXXXXXXXX?text=Hi, I'd like a free trial class"
-              class="hover:border-mamo-black bg-mamo-black text-mamo-gold hover:bg-mamo-gold hover:text-mamo-black block w-full rounded-full border-2 border-transparent p-3 text-center text-sm font-semibold transition-all duration-300">Try
+              class="border-mamo-black text-mamo-gold bg-mamo-black block w-full hover:text-mamo-white rounded-full border-2 hover:bg-mamo-black/75 p-3 text-center text-sm font-semibold transition-all duration-300">Try
               Now</a>
           </div>
 
           <div class="pricing-card bg-white dark:bg-mamo-card">
             <h3 class="pricing-title">
-              <i class="fa-solid fa-book dark:text-mamo-gold text-mamo-gold-deep"></i> Primary Science
+              <i class="fa-solid fa-book dark:text-mamo-gold text-mamo-gold-deep"></i>Primary Science
             </h3>
 
             <p class="pricing-detail text-gray-500 dark:text-gray-400">
@@ -247,7 +254,7 @@
 
           <div class="pricing-card bg-white dark:bg-mamo-card">
             <h3 class="pricing-title">
-              <i class="fa-solid fa-book dark:text-mamo-gold text-mamo-gold-deep"></i> Preparatory Science
+              <i class="fa-solid fa-book dark:text-mamo-gold text-mamo-gold-deep"></i>Preparatory Science
             </h3>
 
             <p class="pricing-detail text-gray-500 dark:text-gray-400">
@@ -272,7 +279,7 @@
 
           <div class="pricing-card bg-white dark:bg-mamo-card">
             <h3 class="pricing-title">
-              <i class="fa-solid fa-book dark:text-mamo-gold text-mamo-gold-deep"></i> Integated Science
+              <i class="fa-solid fa-book dark:text-mamo-gold text-mamo-gold-deep"></i>Integated Science
             </h3>
 
             <p class="pricing-detail text-gray-500 dark:text-gray-400">
@@ -301,7 +308,7 @@
     <!-- Start Testimonials -->
     <section id="reviews">
       <div class="mamo-container">
-        <h2 class="section-title">What They Say</h2>
+        <h2 class="section-title"><i class="fa-solid fa-comment"></i>What They Say</h2>
         <div class="mbs-8 mbe-6 flex justify-center gap-6" id="testimonial-tabs">
           <button class="testimonial-tab testimonial-active" id="parent-tab">
             Parents
@@ -397,18 +404,19 @@
           Book your free trial class today
         </p>
         <a href="https://wa.me/201XXXXXXXXX?text=Hi, I'd like a free trial class"
-          class="text-mamo-gold bg-mamo-black inline-block rounded-full px-4 py-3.5 text-base font-semibold md:px-8 lg:px-10 lg:text-lg"><i
-            class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+          class="inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-300 bg-mamo-black text-mamo-gold px-4 py-3.5 text-base md:px-8 lg:px-10 lg:text-lg hover:bg-mamo-black/75 hover:border-mamo-black/75 border-2 border-mamo-black hover:text-mamo-white"><i
+            class="fa-brands fa-whatsapp"></i>
+          Chat on WhatsApp</a>
       </div>
     </section>
     <!-- End CTA -->
     <!-- Start FAQs -->
     <section id="faq">
       <div class="mamo-container flex flex-col items-center text-center">
-        <h2 class="section-title">FAQ</h2>
+        <h2 class="section-title"><i class="fa-solid fa-circle-question"></i>FAQ</h2>
         <ul class="mbs-8 md:w-160 lg:w-180">
           <li class="faq-question">
-            <div class="faq-header">
+            <div class="faq-header group">
               <h3 class="faq-title">How do classes work?</h3>
               <i class="fa-solid fa-plus faq-icon"></i>
             </div>
@@ -418,7 +426,7 @@
             </p>
           </li>
           <li class="faq-question">
-            <div class="faq-header">
+            <div class="faq-header group">
               <h3 class="faq-title">How do I book a free trial?</h3>
               <i class="fa-solid fa-plus faq-icon"></i>
             </div>
@@ -428,7 +436,7 @@
             </p>
           </li>
           <li class="faq-question">
-            <div class="faq-header">
+            <div class="faq-header group">
               <h3 class="faq-title">How do I pay?</h3>
               <i class="fa-solid fa-plus faq-icon"></i>
             </div>
@@ -438,7 +446,7 @@
             </p>
           </li>
           <li class="faq-question">
-            <div class="faq-header">
+            <div class="faq-header group">
               <h3 class="faq-title">What if I miss a class?</h3>
               <i class="fa-solid fa-plus faq-icon"></i>
             </div>
@@ -448,7 +456,7 @@
             </p>
           </li>
           <li class="faq-question">
-            <div class="faq-header">
+            <div class="faq-header group">
               <h3 class="faq-title">How many per group?</h3>
               <i class="fa-solid fa-plus faq-icon"></i>
             </div>
@@ -466,47 +474,47 @@
   <!-- Start Footer -->
   <footer>
     <div
-      class="md:grid-cols-4 mx-auto max-w-93.75 border-t border-mamo-black/10 dark:border-white/10 px-5 py-6 md:grid md:max-w-191.25 lg:max-w-250 xl:max-w-375 xl:px-15 xl:pbs-10">
-      <a href="#">
+      class="md:grid-cols-3 md:justify-items-center mx-auto max-w-93.75 border-t border-mamo-black/10 dark:border-white/10 px-5 py-6 md:grid md:max-w-191.25 lg:max-w-250 xl:max-w-375 xl:px-15 xl:pbs-10">
+      <a class="mbe-10" href="#">
         <img src="./img/logo.svg" alt="mamo logo"
           class="w-15 hover:opacity-75 lg:w-20 bg-mamo-black rounded-lg p-1 dark:bg-transparent" width="380"
           height="233" />
       </a>
-      <div class="mbs-5 md:m-0">
+      <div class="mbs-5 md:m-0 row-start-2">
         <h3 class="footer-title">Quick Links</h3>
         <ul class="mbe-6 space-y-1">
           <li>
-            <a href="#" class="footer-links">Home</a>
+            <a href="#" class="footer-links"><i class="fa-solid fa-house"></i> Home</a>
           </li>
           <li>
-            <a href="#about" class="footer-links">About</a>
+            <a href="#about" class="footer-links"><i class="fa-solid fa-circle-user"></i> About</a>
           </li>
           <li>
-            <a href="#subjects" class="footer-links">Subjects</a>
+            <a href="#subjects" class="footer-links"><i class="fa-solid fa-book"></i> Subjects</a>
           </li>
           <li>
-            <a href="#pricing" class="footer-links">Pricing</a>
+            <a href="#pricing" class="footer-links"><i class="fa-solid fa-dollar-sign"></i> Pricing</a>
           </li>
           <li>
-            <a href="#reviews" class="footer-links">Reviews</a>
+            <a href="#reviews" class="footer-links"><i class="fa-solid fa-comment"></i> Reviews</a>
           </li>
           <li>
-            <a href="#faq" class="footer-links">FAQ</a>
+            <a href="#faq" class="footer-links"><i class="fa-solid fa-circle-question"></i> FAQ</a>
           </li>
         </ul>
       </div>
-      <div class="mbe-5 md:m-0">
+      <div class="mbe-5 md:m-0 row-start-2">
         <h3 class="footer-title">Contact</h3>
         <a href="tel:+2011xxxxxxxx" class="footer-links">
           <i class="fa-solid fa-phone"></i> +20 1XX XXX XXXX</a>
       </div>
-      <div class="mbe-8 space-y-1 md:m-0">
+      <div class="mbe-8 space-y-1 md:m-0 row-start-2">
         <h3 class="footer-title">Follow Us</h3>
-        <a href="#" class="footer-links block">Facebook</a>
-        <a href="#" class="footer-links block">Instagram</a>
+        <a href="#" class="footer-links block"><i class="fa-brands fa-facebook"></i> Facebook</a>
+        <a href="#" class="footer-links block"><i class="fa-brands fa-instagram"></i> Instagram</a>
       </div>
       <div
-        class="col-span-4 border-t border-mamo-black/10 dark:border-white/10 text-center text-xs text-gray-500 dark:text-gray-400">
+        class="col-span-3 justify-self-stretch border-t border-mamo-black/10 dark:border-white/10 text-center text-xs text-gray-500 dark:text-gray-400">
         <div class="mbe-3 pbs-6">© 2026 MAMO Group. All rights reserved.</div>
         <div>
           Made with <i class="fa-solid fa-heart text-red-500"></i> by Yousef

@@ -1,40 +1,45 @@
 # Session Memory — MAMO Group Landing Page
 
 ## Current State
-Rebuild in progress (rebuild from scratch to train HTML/JS/Tailwind v4 skills before React). All 9 sections are built and the **light/dark theme system is implemented and working**. Hover polish is the next piece of work.
+All 9 sections are built, the light/dark theme is committed, and the **hover + icon pass is finished** but uncommitted. The site is feature-complete for the English-first release. What is left is content, then the React migration — no more feature work in this static HTML version.
 
-- **HEAD:** `7e5e6c3 refactor: extract shared Tailwind styles`.
-- **Uncommitted working tree:** the theme implementation — `index.html`, `main.js`, `src/input.css`, `src/output.css`, `memory.md`. `src/output.css` is freshly built and in sync with the source; `git diff --check` is clean and there are no debug leftovers. Suggested message: `feat: add light/dark theme with saved preference`.
-- **Untracked:** `DESIGN.md` (worth committing separately as `docs:`) and `.impeccable/` (local tool artifacts — prefer `.gitignore` for `live/` and `critique/` rather than committing them).
+- **HEAD:** `20f2442 feat: add light/dark theme with saved preference`.
+- **Uncommitted working tree:** the hover + icon pass — `index.html`, `src/input.css`, `src/output.css`, `memory.md`. `main.js` is **not** touched. `src/output.css` is built and in sync (`npm run build` passes). Suggested message: `feat: add hover feedback and section icons`.
+- **Tracked and committed:** `DESIGN.md` and `.impeccable/config.json` (both landed in `20f2442`).
+- **Ignored:** `.impeccable/design.json`, `.impeccable/live/`, `.impeccable/critique/` — listed individually in `.gitignore`.
 - **Branch:** `main`.
 
 ## Latest Commit
-- `7e5e6c3 refactor: extract shared Tailwind styles` — the `@apply` extraction pass.
-- Before that: `d3c22b7 feat: add footer section with quick links contact and social`.
+- `20f2442 feat: add light/dark theme with saved preference` — the theme pass.
+- Before that: `7e5e6c3 refactor: extract shared Tailwind styles`.
 
 ## Next Step (exact starting point)
-1. **Commit the theme work.** `npm run build` is already done and `src/output.css` is in sync. Update this file first, then commit with `feat: add light/dark theme with saved preference` — stage files explicitly, never `git add .`.
-2. **Fix the hovers** — the full audit with exact fixes is in the "Hover Audit (2026-10-14)" section below. Start with the 5 places where gold-as-text on a light surface fails (~1.99:1).
-3. Fix the testimonials tab content swap (still cosmetic — see Blind Spots), then show Ms. Mai the full site to finalize mock content.
-4. Later: Arabic version + RTL, then a final refactor pass (container pattern → `@utility`, typographic tokens).
+1. **Commit the hover + icon pass** (`feat: add hover feedback and section icons`). `npm run build` is done and `src/output.css` is in sync. Stage files explicitly, never `git add .`.
+2. Show Ms. Mai the full site and lock the mock content (prices, grade wording, WhatsApp number and prefilled text, phone).
+3. Fix the testimonials tab content swap (see Blind Spots) — still cosmetic only.
+4. **Move to React.** Arabic + RTL are deliberately deferred to that migration (see Decisions Log). No further feature work in the HTML version.
 
 ## PENDING (blocking none)
-- Commit the theme work (`feat: add light/dark theme with saved preference`).
-- **Hover pass** — 5 gold-on-light hovers (~1.99:1) + 4 elements with no hover at all (CTA WhatsApp button, `#lang`, `#theme`, `.subject-link`). Details in the Hover Audit section.
-- `.testimonial-detail` dark value is `dark:text-gray-600` → **2.08:1** on the `#22222f` card; should be `dark:text-gray-400` (6.03:1).
-- The three paid pricing cards use `<i class="fa-solid fa-book text-mamo-gold">` = **2.1:1** on a white card → should be `text-mamo-gold-deep dark:text-mamo-gold`.
-- Add `color-scheme` on the root (`dark` while `.dark` is present) so native scrollbars and form controls match the theme — otherwise a bright scrollbar sits beside the dark page.
+- Commit the hover + icon pass (`feat: add hover feedback and section icons`).
 - Fix testimonials tab content switch (real content swap between student/parent cards).
 - Finalize ALL mock content with Ms. Mai after she sees the full site.
-- Flip `fa-arrow-right` → `fa-arrow-left` in the Arabic version.
+
+## Deferred to the React migration (2026-10-22)
+- **Arabic + RTL.** Not built in this static HTML version. Every `ps/pe/ms/me` and every directional icon would have to be mirrored by hand here and then rebuilt again in React — cheaper to do it once, there. This includes flipping `fa-arrow-right` → `fa-arrow-left`.
+- The `#lang` button is `hidden` in `index.html`. `main.js` still binds it; the element exists, so the listener is dead but harmless.
+
+## Hover Implementation Check — resolved (2026-10-22)
+- ~~**Build blocker:** `.faq-question` uses the `group` marker inside `@apply` → `Cannot apply unknown utility class 'group'`~~ → **resolved**: the marker lives on `.faq-header` in `index.html` and its children use `group-hover:`. `npm run build` passes.
+- ~~Hero free-trial button only changes an imperceptible shadow~~ / ~~CTA WhatsApp changes colour with no transition~~ / ~~subject links give no directional cue~~ / ~~FAQ plus icon only reacts to direct hover~~ → **all resolved**: fill + border shift on the hero pair, `transition-all duration-300` throughout, `.subject-link-arrow` slides on `group-hover`, and `.faq-icon` reacts to the whole row.
+- **What the hover pass actually is:** inline per-element utilities in `index.html` (plus `@apply` for the shared card/link classes) — **not** the `.btn*` component system that used to be described below. See "Button hover system — what actually shipped".
 
 ## Project Structure (current)
 ```
 MAMO-Group-Landing/
-├── index.html              (521 lines, all 9 sections)
+├── index.html              (529 lines, all 9 sections)
 ├── main.js                 (116 lines — burger nav, theme + persistence, lang, video play, testimonial tabs, FAQ accordion)
 ├── src/
-│   ├── input.css           (184 lines — @theme tokens, @custom-variant dark, @apply component classes, @font-face)
+│   ├── input.css           (188 lines — @theme tokens, @custom-variant dark, @apply component classes, @font-face)
 │   ├── all.min.css         (Font Awesome, local)
 │   └── output.css          (generated, TRACKED on purpose — run `npm run build` after any class change)
 ├── img/                    (logo.svg, logo.jpg, miss-mai.jpg, miss-mai-1.jpg)
@@ -43,7 +48,7 @@ MAMO-Group-Landing/
 ├── AGENTS.md               (project instructions)
 ├── skill.md                (coaching methodology)
 ├── PRODUCT.md              (product context)
-├── DESIGN.md               (design direction — untracked)
+├── DESIGN.md               (design direction — tracked, committed in 20f2442)
 ├── memory.md               (this file)
 ├── package.json            (`npm run dev` = watch, `npm run build` = one-off)
 └── README.md
@@ -74,10 +79,12 @@ MAMO-Group-Landing/
 - **FAQ toggle**: if/else on the presence of `faq-active` — close-all + open, vs. close-only toggle.
 - **Theme strategy (2026-10-14):** `.dark` class on `<html>` + `@custom-variant dark (&:where(.dark, .dark *))`. **Dark is the default**, because it is the brand's native canvas — the logo asset is a white monogram on a baked-in black plate. Light is the secondary "day" mode.
 - **`prefers-color-scheme` is deliberately NOT used.** First visit = dark by design, and the choice is read only from `localStorage`. Don't "fix" this without asking.
-- **Specificity note:** under this variant, `hover:` beats `dark:` (`hover:` = 0,2,0 vs `dark:` = 0,1,0 through `:where`). That is why `hover:bg-mamo-gold hover:text-mamo-black` wins correctly inside dark mode on the gold outline buttons.
+- **Specificity note:** under this variant, `hover:` beats `dark:` (`hover:` = 0,2,0 vs `dark:` = 0,1,0 through `:where`). No live conflict exists right now, because the old `hover:bg-mamo-gold hover:text-mamo-black` gold-fill button was replaced by a `bg-mamo-gold/60` wash on different properties. Keep the ordering in mind if a `hover:` and a `dark:` ever set the same property again.
 - Theme state: `localStorage` key `theme`, values `"light"` / `"dark"`. Nothing is written on first load; "no value" means the HTML default (dark).
 - **Text colours and section backgrounds inherit; card surfaces and borders do not.** Preferred fix order: delete the hardcoded class and let it inherit, only then add an explicit `dark:` pair.
 - **Unlayered `@apply` rules beat inline utilities.** A colour set inside a custom class in `input.css` cannot be overridden by a class on the element — so set any given colour in exactly one place.
+- **Arabic + RTL are deferred to the React migration (2026-10-22).** Not built in the static HTML version. Directional logic gets written once, in React, instead of twice by hand.
+- **`color-scheme` was considered and declined (2026-10-22).** The native scrollbar stays light next to the dark page. No form controls exist yet, so the practical cost is that scrollbar only. Do not re-raise it as a pending item.
 
 ## FAQ Accordion — How It Works
 - **Selector:** `#faq ul div` (click on the header `<div>` only, NOT `<li>` — so clicking an answer `<p>` doesn't trigger the toggle).
@@ -88,12 +95,15 @@ MAMO-Group-Landing/
 - **Result:** opening one closes the others; re-clicking an open item closes it.
 
 ## Footer Structure
-- Logo (`logo.svg`, `w-15 lg:w-20`, wrapped in a black chip in light mode).
-- Quick Links: Home, About, Subjects, Pricing, Reviews, FAQ.
+- **Grid:** `md:grid-cols-3` + `md:justify-items-center`. The logo sits alone in row 1; Quick Links / Contact / Follow Us share row 2 via `row-start-2`; the copyright bar is `col-span-3 justify-self-stretch` beneath them. (Was `grid-cols-4` before 2026-10-22 — four blocks could never fill three columns plus a full-width bar.)
+- Logo (`logo.svg`, `w-15 lg:w-20`, wrapped in a black chip in light mode; `mbe-10` beneath it inside the grid).
+- Quick Links: Home, About, Subjects, Pricing, Reviews, FAQ — each prefixed with its Font Awesome icon.
 - Contact: placeholder phone `+20 1XX XXX XXXX`.
+- Follow Us: Facebook, Instagram — both icon-prefixed.
 - Copyright: `© 2026 MAMO Group. All rights reserved.`
 - Credit: `Made with ♥️ by Yousef Khaled`.
 - Container pattern: same as other sections (`max-w-93.75 px-5` etc.).
+- `.footer-links` is `flex items-center gap-2`; the markup also leaves a literal space after each icon, so the visual gap is 8px + one space width.
 
 ## Client Requirements (client: Miss Mai — science teacher)
 - **Teacher**: Science for Primary/Preparatory + Biology for Secondary, at Narmer Language School.
@@ -104,15 +114,15 @@ MAMO-Group-Landing/
 - **Payment**: Vodafone Cash / InstaPay, every 4 sessions, no installments.
 - **Groups**: 20-25 per stage; weekly homework corrected; monthly exams.
 - **Recorded sessions**: only for students who MISSED the live class (not sold separately).
-- **Features**: WhatsApp button → chat with teacher · Light/Dark mode · English default, Arabic secondary.
-- **Release plan**: first release English only; light mode + Arabic later.
+- **Features**: WhatsApp button → chat with teacher · Light/Dark mode · English only for now.
+- **Release plan**: first release English only. **Arabic + RTL moved to the React migration (2026-10-22)** — not part of this static HTML build.
   > Note: the built site now ships **dark** by default, which is the user's later decision (2026-10-14) and is consistent with the logo asset.
 
 ## Blind Spots to raise with the user (coach role)
 - **Testimonials tabs are cosmetic only**: `main.js` toggles `testimonial-active` but NEVER swaps the card content — clicking "Parents" still shows the 4 student cards. The client wants students AND parents. Needs a real content switch (or two card groups toggled by `hidden`).
 - The 4 testimonial cards are identical duplicates (same "Ahmed S., Grade 8" + same quote) — placeholder only.
 - WhatsApp links all use the placeholder `201XXXXXXXXX` + the same prefilled text (fine until client handoff).
-- `#lang` only rewrites its own label; it does not switch language or direction.
+- `#lang` only rewrites its own label; it does not switch language or direction. It is now `hidden` in `index.html` (2026-10-22), pending the React/RTL work.
 
 ## Production-Readiness Audit
 - `AUDIT.md` (created 2026-09-17) is **no longer in the repo**. If the user says "رجّعني للـ audit", say the file is gone and offer to rebuild a priority list from the current source instead of pretending to resume it.
@@ -152,7 +162,7 @@ Method: scratch copy of the project, fresh CSS build, headless full-page capture
 - **Structure:** `<html lang="en" class="dark">` is the no-JS / first-paint default. An inline `<head>` script removes `.dark` only when `localStorage.theme === "light"`. `main.js` toggles the class and writes `theme` on click. The `#theme` button holds the icon.
 - **Detector before → after: 10 low-contrast warnings → 0.** Remaining: 27 `cramped-padding` (FALSE POSITIVES), 1 `hero-eyebrow-chip`, 1 `dark-glow` (the deliberate gold card glow on the dark page — a style choice, not a bug).
 - **Card surfaces now:** light = `bg-white border-mamo-black/10`; dark = `dark:bg-mamo-card dark:border-white/10`. Card backgrounds are set **inline per card in `index.html`**, not in `.pricing-card`'s `@apply` — deliberate, because an unlayered `@apply` colour would beat the inline utility and block the Free-Trial card's `bg-mamo-gold`.
-- **Known gaps at commit time:** the PENDING items above (hovers, `testimonial-detail` dark value, `fa-book` icon gold on white cards).
+- ~~**Known gaps at commit time:** the PENDING items above (hovers, `testimonial-detail` dark value, `fa-book` icon gold on white cards).~~ → **all resolved 2026-10-22**: `.testimonial-detail` is `dark:text-gray-400`, the pricing `fa-book` icons are `text-mamo-gold-deep dark:text-mamo-gold`, and the hover pass landed.
 - **Deferred theme-JS review notes** (learner judged them non-blocking; revisit when the theme code is next touched):
   - The icon state is derived from `localStorage` in two places instead of from the `.dark` class — right result today only because the mapping happens to be symmetric.
   - The click handler flips the class and `localStorage` as two independent toggles; they stay in sync only because both were in sync to begin with. A forced form (`toggle("dark", next === "dark")`) is safer.
@@ -161,7 +171,7 @@ Method: scratch copy of the project, fresh CSS build, headless full-page capture
   - Icons could be pure CSS instead of JS: two `<i>` elements with `dark:hidden` / `hidden dark:inline-block` — verified to compile in the right order, which removes all icon JS, the icon flash, and any chance of drift.
 
 ## Hover Audit (2026-10-14)
-Full sweep of every `hover:` in the project. Fixes agreed but **not yet applied**.
+Full sweep of every `hover:` in the project. **All of it was applied on 2026-10-22** — kept here for the reasoning and the measured ratios.
 
 ### Gold-as-text on a light surface (~1.99:1 — the link/icon disappears in day mode)
 | Element | Where | Fix |
@@ -172,17 +182,39 @@ Full sweep of every `hover:` in the project. Fixes agreed but **not yet applied*
 | `.footer-links` | `src/input.css` | same |
 | burger bars `group-hover:bg-mamo-gold` | `index.html` (3 spans) | `group-hover:bg-mamo-gold-deep dark:group-hover:bg-mamo-gold` |
 
-- Extra bug: `.testimonial-tab`'s `hover:` (0,2,0) beats `.testimonial-active` (0,1,0), so hovering the **active** tab strips its gold and it vanishes in day mode. The fix above resolves both.
+- Extra bug: `.testimonial-tab`'s `hover:` (0,2,0) beats `.testimonial-active` (0,1,0), so hovering the **active** tab strips its gold and it vanishes in day mode. ~~The fix above resolves both~~ → **applied**: the hover colour is now identical to the active colour, so the collision is invisible in both themes.
 
 ### No hover at all
-- CTA "Chat on WhatsApp" — the primary CTA on the page. Add `hover:bg-mamo-gold hover:text-mamo-black` like "Try Now".
-- `#lang` and `#theme` — add `hover:opacity-70` (or a gold shift).
-- `.subject-link` ("Learn More →") — the colour is already gold, so use `hover:underline` or move the arrow instead.
+- ~~CTA "Chat on WhatsApp" — add `hover:bg-mamo-gold hover:text-mamo-black` like "Try Now".~~ → **applied differently** (2026-10-22): `hover:bg-mamo-black/75` + `hover:text-mamo-white`. The gold-fill inversion was rejected because gold→black text passes through ~1:1 mid-transition.
+- ~~`#lang` and `#theme` — add `hover:opacity-70`.~~ → **applied differently**: `hover:bg-mamo-gold/60 dark:hover:bg-mamo-gold/20` disc.
+- ~~`.subject-link` — use `hover:underline` or move the arrow.~~ → **applied**: the arrow moves (`.subject-link-arrow` + `group-hover:translate-x-1`) **and** the text shifts to `mamo-black` / `dark:mamo-white`.
 
 ### Consistency
-- `.about-card` and `.subject-card` have `hover:-translate-y-0.5`; `.pricing-card` and `.testimonial-card` don't → make all four match.
-- The FAQ row is clickable as a whole, but `hover:` is on the title and the icon separately → wrap `.faq-header` in `group` and use `group-hover:`.
-- The gold Free-Trial button uses `hover:shadow-mamo-gold/50` on a gold background → invisible. Change the background on hover instead.
+- ~~`.about-card` and `.subject-card` have `hover:-translate-y-0.5`; `.pricing-card` and `.testimonial-card` don't~~ → **resolved**: all four cards now lift.
+- ~~The FAQ row is clickable as a whole, but `hover:` is on the title and the icon separately~~ → **resolved 2026-10-22**: `.faq-header` carries `group` in `index.html`, and `.faq-title` / `.faq-icon` use `group-hover:`.
+- ~~The gold Free-Trial button uses `hover:shadow-mamo-gold/50` on a gold background → invisible.~~ → **resolved 2026-10-22**: the fill shifts instead (see "Button hover system — what actually shipped").
 
 ### Verified working (leave alone)
-`#logo` and the footer logo (`hover:opacity-75`), hero portrait (`hover:scale-105`), `#play-button` (`hover:scale-110`), "Try Now", `.pricing-btn` (its `hover:` correctly beats `dark:`), hero "Learn More".
+`#logo` and the footer logo (`hover:opacity-75`), hero portrait (`hover:scale-105`), `#play-button` (`hover:scale-110`). Buttons are handled inline per element — see "Button hover system — what actually shipped" below.
+
+## Button hover system — what actually shipped (2026-10-22)
+> The write-up that used to sit here claimed a `.btn` / `.btn-primary` / `.btn-outline` / `.btn-ink` / `.icon-btn` system had been implemented in `src/input.css`. **It was not.** None of those classes exist in the codebase, there is no `:active` or `:focus-visible` rule, and `.pricing-btn` is still there (used 3×). Corrected so this file matches the site. What shipped is the same *intent* expressed as **inline utilities on each element** — nothing centralised, so nothing can drift, but nothing is reusable either.
+
+### What each element actually carries
+- **Shared base (hero pair + CTA):** `inline-flex items-center justify-center gap-2 rounded-full border-2 font-semibold transition-all duration-300` — **300ms**, no custom easing. Padding and text size stay per-instance (hero `px-8 py-3.5 text-base`, CTA `px-4 py-3.5 text-base lg:text-lg`).
+- **Hero "Free Trial"** — `bg-mamo-gold text-mamo-black`; hover `bg-mamo-gold/60`, `hover:border-mamo-gold`, label → `gold-deep` (light) / `gold` (dark).
+- **Hero "Learn More"** — `text-mamo-gold-deep border-mamo-gold-deep` (+ the dark gold pair), transparent fill; hover `bg-mamo-gold/60` / `dark:hover:bg-mamo-gold/20`, text unchanged.
+- **`.pricing-btn`** ("Book Now", 3×) — same shape declared in `@apply`; hover `bg-mamo-gold/60` / `dark:hover:bg-mamo-gold/20`.
+- **"Try Now"** (free card) + **CTA "Chat on WhatsApp"** — `bg-mamo-black` + `text-mamo-gold` + `border-2 border-mamo-black`; hover `bg-mamo-black/75` + `hover:border-mamo-black/75` + `hover:text-mamo-white`.
+- **`#theme` / `#lang`** — `rounded-full p-2` + `hover:bg-mamo-gold/20` (one value for both themes). The old dead `hover:p-2` / `hover:rounded-full` are gone.
+- **`.subject-link`** — `hover:text-mamo-black dark:hover:text-mamo-white`, plus `.subject-link-arrow` through `group-hover:translate-x-1`. 300ms.
+- **Cards** — all four lift (`hover:-translate-y-0.5`) and all four run at **300ms**. Glow: `/20→/80` on about, `/50` on subject, `/80` on pricing and testimonial.
+- **`.pricing-title`** is `flex items-center gap-2` so the `fa-book` / `fa-gift` icon sits on the title's baseline.
+- **Absent by design or by omission:** no `:focus-visible` styling anywhere (UA outline only), no `:active` press state.
+
+### What those values measure (measured 2026-10-22, kept as fact)
+- Hero "Free Trial" hover, **dark**: `#d4af37` on `#836d25` = **2.39:1**; the label also crosses gold while the fill darkens, so it briefly disappears.
+- Hero "Free Trial" hover, **light**: `#74570a` on `#e2cd85` = **4.28:1**.
+- `.pricing-btn` / "Learn More" hover, **light**: `#74570a` on `#e2cd85` = **4.28:1** (14–16px is not "large text", so this misses AA).
+- "Try Now" / CTA hover: `bg-mamo-black/75` over a gold surface renders `#3d3315` (olive-brown). The border fades to the same value, so the ring disappears into the fill instead of separating from it.
+- Rejected alternatives, recorded so they are not re-derived: `#c6a02e` / `#e2c257` solid fills with the label kept `mamo-black` = 7.98:1 / 11.40:1; `gold/10` / `gold/20` washes = 6.01:1 / 6.70:1; `#232323` fill with a gold label = 7.47:1.

@@ -16,7 +16,7 @@
 }
 
 .section-title {
-  @apply text-mamo-gold-deep border-mamo-gold-deep dark:text-mamo-gold dark:border-mamo-gold bg-mamo-gold/10 mx-auto max-w-fit rounded-full border-2 px-4 py-1.5 text-2xl font-bold;
+  @apply text-mamo-gold-deep border-mamo-gold-deep dark:text-mamo-gold dark:border-mamo-gold bg-mamo-gold/10 mx-auto max-w-fit rounded-full border-2 px-4 py-1.5 text-xl md:text-2xl font-bold flex items-center gap-2;
 }
 
 /* Header */
@@ -25,12 +25,12 @@
 }
 
 .nav-layout {
-  @apply flex h-full items-center;
+  @apply flex h-full items-center gap-2;
 }
 
 /* About Section */
 .about-card {
-  @apply shadow-mamo-gold/20 hover:shadow-mamo-gold/80 rounded-xl bg-white p-4 shadow-lg transition-all duration-200 hover:-translate-y-0.5 border border-mamo-black/10 dark:bg-mamo-card dark:border-white/10;
+  @apply shadow-mamo-gold/20 hover:shadow-mamo-gold/80 rounded-xl bg-white p-4 shadow-lg transition-all duration-300 hover:-translate-y-0.5 border border-mamo-black/10 dark:bg-mamo-card dark:border-white/10;
 }
 
 .about-card-icon {
@@ -43,7 +43,7 @@
 
 /* Subject Section */
 .subject-card {
-  @apply hover:shadow-mamo-gold/50 dark:bg-mamo-card dark:border-white/10 rounded-2xl p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg bg-white border border-mamo-black/10;
+  @apply hover:shadow-mamo-gold/50 dark:bg-mamo-card dark:border-white/10 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg bg-white border border-mamo-black/10;
 }
 
 .subject-icon {
@@ -59,16 +59,20 @@
 }
 
 .subject-link {
-  @apply dark:text-mamo-gold text-mamo-gold-deep flex items-center gap-1.5 text-sm font-medium;
+  @apply dark:text-mamo-gold text-mamo-gold-deep inline-flex items-center gap-1.5 text-sm font-medium hover:text-mamo-black dark:hover:text-mamo-white transition-all duration-300;
+}
+
+.subject-link-arrow {
+  @apply transition-transform duration-300 group-hover:translate-x-1;
 }
 
 /* Pricing Section */
 .pricing-card {
-  @apply hover:shadow-mamo-gold/80 border-mamo-black/10 rounded-2xl border p-6 shadow-lg shadow-black/5 transition-all duration-300 dark:border-white/10;
+  @apply hover:shadow-mamo-gold/80 border-mamo-black/10 rounded-2xl border p-6 shadow-lg shadow-black/5 transition-all duration-300 dark:border-white/10 hover:-translate-y-0.5;
 }
 
 .pricing-title {
-  @apply mbe-1 text-lg font-semibold;
+  @apply mbe-1 text-lg font-semibold flex items-center gap-2;
 }
 
 .pricing-detail {
@@ -84,12 +88,12 @@
 }
 
 .pricing-btn {
-  @apply border-mamo-gold-deep text-mamo-gold-deep dark:border-mamo-gold dark:text-mamo-gold hover:bg-mamo-gold hover:text-mamo-black block w-full rounded-full border-2 bg-transparent p-3 text-center text-sm font-semibold transition-all duration-300;
+  @apply hover:bg-mamo-gold/60 dark:hover:bg-mamo-gold/20 border-mamo-gold-deep text-mamo-gold-deep dark:border-mamo-gold dark:text-mamo-gold block w-full rounded-full border-2 bg-transparent p-3 text-center text-sm font-semibold transition-all duration-300;
 }
 
 /* Testimonial Section */
 .testimonial-tab {
-  @apply hover:text-mamo-gold-deep dark:hover:text-mamo-gold cursor-pointer border-be-2 border-transparent pbe-2 text-sm font-semibold text-gray-600 transition-all duration-200 dark:text-gray-300;
+  @apply hover:text-mamo-gold-deep dark:hover:text-mamo-gold cursor-pointer border-be-2 border-transparent pbe-2 text-sm font-semibold text-gray-600 transition-all duration-300 dark:text-gray-300;
 }
 
 .testimonial-active {
@@ -97,7 +101,7 @@
 }
 
 .testimonial-card {
-  @apply bg-white hover:shadow-mamo-gold/80 rounded-2xl p-6 shadow-lg shadow-black/5 transition-all duration-300 dark:bg-mamo-card dark:border-white/10 border border-mamo-black/10;
+  @apply hover:-translate-y-0.5 bg-white hover:shadow-mamo-gold/80 rounded-2xl p-6 shadow-lg shadow-black/5 transition-all duration-300 dark:bg-mamo-card dark:border-white/10 border border-mamo-black/10;
 }
 
 .testimonial-stars {
@@ -130,11 +134,11 @@
 }
 
 .faq-title {
-  @apply hover:text-mamo-gold-deep dark:hover:text-mamo-gold transition-colors duration-300 text-mamo-black dark:text-mamo-white;
+  @apply group-hover:text-mamo-gold-deep dark:group-hover:text-mamo-gold transition-colors duration-300 text-mamo-black dark:text-mamo-white;
 }
 
 .faq-icon {
-  @apply text-mamo-gold-deep transition-all duration-300 hover:text-black dark:hover:text-white dark:text-mamo-gold;
+  @apply text-mamo-gold-deep transition-all duration-300 group-hover:text-mamo-black dark:group-hover:text-mamo-white dark:text-mamo-gold;
 }
 
 .faq-answer {
@@ -147,7 +151,7 @@
 }
 
 .footer-links {
-  @apply hover:text-mamo-gold-deep dark:hover:text-mamo-gold text-gray-500 transition-colors duration-300 dark:text-gray-400;
+  @apply hover:text-mamo-gold-deep dark:hover:text-mamo-gold text-gray-500 transition-colors duration-300 dark:text-gray-400 flex items-center gap-2;
 }
 
 /* Fonts */
