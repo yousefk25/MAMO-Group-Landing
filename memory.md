@@ -1,26 +1,26 @@
 # Session Memory — MAMO Group Landing Page
 
 ## Current State
-All 9 sections are built, the light/dark theme is committed, and the **hover + icon pass is finished** but uncommitted. The site is feature-complete for the English-first release. What is left is content, then the React migration — no more feature work in this static HTML version.
+All 9 sections are built; the light/dark theme and hover + icon pass are committed. The site is feature-complete for the English-first release. What is left is content, then the React migration — no more feature work in this static HTML version.
 
-- **HEAD:** `20f2442 feat: add light/dark theme with saved preference`.
-- **Uncommitted working tree:** the hover + icon pass — `index.html`, `src/input.css`, `src/output.css`, `memory.md`. `main.js` is **not** touched. `src/output.css` is built and in sync (`npm run build` passes). Suggested message: `feat: add hover feedback and section icons`.
+- **HEAD:** `4751d59 feat: add hover states, nav icons and combined footer grid`.
+- **Uncommitted working tree:** mobile menu interaction improvements in `main.js`, plus the freshly generated `src/output.css`. The menu now closes on an outside click and on scroll. Suggested message: `feat: close mobile menu on outside click and scroll`.
 - **Tracked and committed:** `DESIGN.md` and `.impeccable/config.json` (both landed in `20f2442`).
 - **Ignored:** `.impeccable/design.json`, `.impeccable/live/`, `.impeccable/critique/` — listed individually in `.gitignore`.
 - **Branch:** `main`.
 
 ## Latest Commit
-- `20f2442 feat: add light/dark theme with saved preference` — the theme pass.
-- Before that: `7e5e6c3 refactor: extract shared Tailwind styles`.
+- `4751d59 feat: add hover states, nav icons and combined footer grid` — hover feedback, navigation icons, and the final footer grid.
+- Before that: `20f2442 feat: add light/dark theme with saved preference` — the theme pass.
 
 ## Next Step (exact starting point)
-1. **Commit the hover + icon pass** (`feat: add hover feedback and section icons`). `npm run build` is done and `src/output.css` is in sync. Stage files explicitly, never `git add .`.
+1. **Commit the mobile-menu interaction update** (`feat: close mobile menu on outside click and scroll`). Stage `main.js`, `src/output.css`, and this file explicitly; never `git add .`.
 2. Show Ms. Mai the full site and lock the mock content (prices, grade wording, WhatsApp number and prefilled text, phone).
 3. Fix the testimonials tab content swap (see Blind Spots) — still cosmetic only.
 4. **Move to React.** Arabic + RTL are deliberately deferred to that migration (see Decisions Log). No further feature work in the HTML version.
 
 ## PENDING (blocking none)
-- Commit the hover + icon pass (`feat: add hover feedback and section icons`).
+- Commit the mobile-menu interaction update (`feat: close mobile menu on outside click and scroll`).
 - Fix testimonials tab content switch (real content swap between student/parent cards).
 - Finalize ALL mock content with Ms. Mai after she sees the full site.
 
@@ -37,7 +37,7 @@ All 9 sections are built, the light/dark theme is committed, and the **hover + i
 ```
 MAMO-Group-Landing/
 ├── index.html              (529 lines, all 9 sections)
-├── main.js                 (116 lines — burger nav, theme + persistence, lang, video play, testimonial tabs, FAQ accordion)
+├── main.js                 (165 lines — burger nav with outside-click/scroll close, theme + persistence, lang, video play, testimonial tabs, FAQ accordion)
 ├── src/
 │   ├── input.css           (188 lines — @theme tokens, @custom-variant dark, @apply component classes, @font-face)
 │   ├── all.min.css         (Font Awesome, local)
@@ -93,6 +93,11 @@ MAMO-Group-Landing/
   - If `faqtext[index]` HAS `faq-active` → close this one only (toggle off).
 - **Classes:** `rotate-45` on the plus = open indicator; `faq-active` on the `<p>` = answer open; `max-h-0` on the `<p>` = answer hidden.
 - **Result:** opening one closes the others; re-clicking an open item closes it.
+
+## Mobile Navigation — Current Behaviour (2026-10-25)
+- `main.js` groups the navigation logic under a dedicated section. `barsBehaviour()` toggles the burger/X icon; `openMenus()` toggles the nav panel; `closeMenu()` explicitly restores the closed nav and burger state.
+- The mobile menu closes after a nav-link click, after a click whose target is outside both `nav` and `#burger-icon`, and after a scroll while the menu carries `max-h-85`.
+- The scroll handler is restricted to the mobile breakpoint. Keep that breakpoint definition consistent with Tailwind's `lg` breakpoint when this code is next refactored.
 
 ## Footer Structure
 - **Grid:** `md:grid-cols-3` + `md:justify-items-center`. The logo sits alone in row 1; Quick Links / Contact / Follow Us share row 2 via `row-start-2`; the copyright bar is `col-span-3 justify-self-stretch` beneath them. (Was `grid-cols-4` before 2026-10-22 — four blocks could never fill three columns plus a full-width bar.)

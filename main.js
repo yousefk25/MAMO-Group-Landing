@@ -1,7 +1,7 @@
 const burgerIcon = document.querySelector("#burger-icon");
 const bars = document.querySelectorAll("#burger-icon span");
 const nav = document.querySelector("nav");
-const link = document.querySelectorAll("nav li a");
+const links = document.querySelectorAll("nav li a");
 const themeBtn = document.querySelector("#theme");
 const themeIcon = document.querySelector("#theme i");
 const langIcon = document.querySelector("#lang");
@@ -12,7 +12,8 @@ const faq = document.querySelectorAll("#faq ul div");
 const faqPlus = document.querySelectorAll("#faq .fa-plus");
 const faqtext = document.querySelectorAll("#faq p");
 
-// Burger Icon
+// Start Nav Menu
+// Burger icon behaviour
 function barsBehaviour() {
   bars.forEach((ele, index) => {
     // 1st & 3rd bar
@@ -34,25 +35,71 @@ function barsBehaviour() {
   });
 }
 
-burgerIcon.addEventListener("click", () => {
+function closeMenu() {
+  nav.classList.add("max-h-0");
+  nav.classList.remove("pbe-5");
+  nav.classList.remove("max-h-85");
+  bars.forEach((ele, index) => {
+    // 1st & 3rd bar
+    if (index === 0 || index === 2) {
+      if (index === 0) {
+        ele.classList.remove("rotate-45");
+      }
+      if (index === 2) {
+        ele.classList.remove("-rotate-45");
+      }
+      ele.classList.remove("absolute");
+      ele.classList.remove("translate-y-1/2");
+    }
+
+    // 2nd bar
+    if (index === 1) {
+      ele.classList.remove("opacity-0");
+    }
+  });
+}
+
+function openMenus() {
   nav.classList.toggle("max-h-0");
   nav.classList.toggle("pbe-5");
   nav.classList.toggle("max-h-85");
+}
+
+// Menu closing
+burgerIcon.addEventListener("click", () => {
+  openMenus();
   barsBehaviour();
 });
 
-link.forEach((ele) => {
+// Close menu on click any links
+links.forEach((ele) => {
   ele.onclick = () => {
-    if (!window.matchMedia("(min-width: 1024px)").matches) {
-      nav.classList.toggle("max-h-0");
-      nav.classList.toggle("pbe-5");
-      nav.classList.toggle("max-h-85");
+    if (window.matchMedia("(max-width: 1024px)").matches) {
+      openMenus();
       barsBehaviour();
     }
   };
 });
 
-// Dark Mode Icon
+// Close menu on any click
+document.addEventListener("click", (ele) => {
+  if (!nav.contains(ele.target) && !burgerIcon.contains(ele.target)) {
+    closeMenu();
+  }
+});
+
+// close menu during scroll
+window.addEventListener("scroll", () => {
+  if (
+    window.matchMedia("(max-width: 1024px)").matches &&
+    nav.classList.contains("max-h-85")
+  ) {
+    closeMenu();
+  }
+});
+// End Nav Menu
+
+// Start Dark Dark Theme
 if (localStorage.getItem("theme") === "light") {
   themeIcon.classList.toggle("fa-sun");
   themeIcon.classList.toggle("fa-moon");
@@ -67,6 +114,7 @@ themeBtn.addEventListener("click", () => {
     ? localStorage.setItem("theme", "dark")
     : localStorage.setItem("theme", "light");
 });
+// Start Dark Theme
 
 // Language button
 langIcon.addEventListener("click", () => {
@@ -81,7 +129,7 @@ playButton.addEventListener("click", () => {
   playIcon.classList.toggle("fa-pause");
 });
 
-// Testimonial tabs
+// Start Testimonial tabs
 testimonialTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     testimonialTabs.forEach((t) => {
@@ -90,9 +138,9 @@ testimonialTabs.forEach((tab) => {
     tab.classList.add("testimonial-active");
   });
 });
+// End Testimonial tabs
 
-//faq
-
+// Start FAQ behaviour
 faq.forEach((ele, index) => {
   ele.addEventListener("click", () => {
     if (!faqtext[index].classList.contains("faq-active")) {
@@ -114,3 +162,4 @@ faq.forEach((ele, index) => {
     }
   });
 });
+// End FAQ behaviour
