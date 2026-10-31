@@ -1,27 +1,24 @@
 # Session Memory — MAMO Group Landing Page
 
 ## Current State
-All 9 sections are built; the light/dark theme and hover + icon pass are committed. The site is feature-complete for the English-first release. What is left is content, then the React migration — no more feature work in this static HTML version.
+All 9 sections are built; the light/dark theme, the hover + icon pass, the mobile-menu interaction update, and the testimonial content switch are committed. The site is feature-complete for the English-first release. What is left is content, then the React migration — no more feature work in this static HTML version.
 
-- **HEAD:** `4751d59 feat: add hover states, nav icons and combined footer grid`.
-- **Uncommitted working tree:** mobile menu interaction improvements in `main.js`, plus the freshly generated `src/output.css`. The menu now closes on an outside click and on scroll. Suggested message: `feat: close mobile menu on outside click and scroll`.
+- **HEAD:** `54a996d feat: close mobile menu on outside click and scroll`.
+- **Uncommitted working tree:** only `.gitignore` (adds `.claude/`). `src/output.css` is byte-identical to a fresh `npm run build` (60,283 bytes), so nothing is waiting to be generated or staged.
 - **Tracked and committed:** `DESIGN.md` and `.impeccable/config.json` (both landed in `20f2442`).
 - **Ignored:** `.impeccable/design.json`, `.impeccable/live/`, `.impeccable/critique/` — listed individually in `.gitignore`.
 - **Branch:** `main`.
 
 ## Latest Commit
-- `4751d59 feat: add hover states, nav icons and combined footer grid` — hover feedback, navigation icons, and the final footer grid.
-- Before that: `20f2442 feat: add light/dark theme with saved preference` — the theme pass.
+- `54a996d feat: close mobile menu on outside click and scroll` — the menu now closes on an outside click and on scroll.
+- Before that: `4751d59 feat: add hover states, nav icons and combined footer grid` — hover feedback, navigation icons, and the final footer grid; `20f2442 feat: add light/dark theme with saved preference` — the theme pass.
+- **Not yet committed (this session):** testimonial content switch — `index.html` now holds two `.cards` groups (Parents visible, Students `hidden`); `main.js` maps each tab to its group via `index` and swaps visibility; the stray blank line in `src/input.css` was removed and `output.css` rebuilt. Suggested commit title: `feat: switch testimonial cards between parents and students`.
 
 ## Next Step (exact starting point)
-1. **Commit the mobile-menu interaction update** (`feat: close mobile menu on outside click and scroll`). Stage `main.js`, `src/output.css`, and this file explicitly; never `git add .`.
-2. Show Ms. Mai the full site and lock the mock content (prices, grade wording, WhatsApp number and prefilled text, phone).
-3. Fix the testimonials tab content swap (see Blind Spots) — still cosmetic only.
-4. **Move to React.** Arabic + RTL are deliberately deferred to that migration (see Decisions Log). No further feature work in the HTML version.
+1. Show Ms. Mai the full site and lock the mock content (prices, grade wording, WhatsApp number and prefilled text, phone).
+2. **Move to React.** Arabic + RTL are deliberately deferred to that migration (see Decisions Log). No further feature work in the HTML version.
 
 ## PENDING (blocking none)
-- Commit the mobile-menu interaction update (`feat: close mobile menu on outside click and scroll`).
-- Fix testimonials tab content switch (real content swap between student/parent cards).
 - Finalize ALL mock content with Ms. Mai after she sees the full site.
 
 ## Deferred to the React migration (2026-10-22)
@@ -36,8 +33,8 @@ All 9 sections are built; the light/dark theme and hover + icon pass are committ
 ## Project Structure (current)
 ```
 MAMO-Group-Landing/
-├── index.html              (529 lines, all 9 sections)
-├── main.js                 (165 lines — burger nav with outside-click/scroll close, theme + persistence, lang, video play, testimonial tabs, FAQ accordion)
+├── index.html              (603 lines, all 9 sections)
+├── main.js                 (177 lines — burger nav with outside-click/scroll close, theme + persistence, lang, video play, testimonial tabs, FAQ accordion)
 ├── src/
 │   ├── input.css           (188 lines — @theme tokens, @custom-variant dark, @apply component classes, @font-face)
 │   ├── all.min.css         (Font Awesome, local)
@@ -54,6 +51,11 @@ MAMO-Group-Landing/
 └── README.md
 ```
 > `AUDIT.md` and `IDEA.md` are **no longer in the repo**.
+
+## Persistent Memory (supermemory) — indexed 2026-10-25
+- Container `repo_mamo_group_landing` (50 documents). Covers stack/commands, the `output.css` rule, theme + gold tokens, container ladder, JS structure, FAQ/mobile-nav mechanics, the `@apply` layering trap, mock-content rule, known defects, git/deploy conventions, roadmap, and user-scope preferences.
+- 11 superseded July–August 2026 entries (design-spec.html, `#111827` palette, "no git", GitHub `yousefk2030`) were deleted; one correction entry records the overrides.
+- If the `supermemory` tool is missing from a session, the plugin's v5 API still works: `POST /ns/<container>/document` with the key in `~/.supermemory-opencode/credentials.json`.
 
 ## Design Tokens (src/input.css @theme)
 - `--color-mamo-gold`: `#d4af37` — **fill role**: button/card/CTA backgrounds, and gold as text **on dark surfaces** (9.4:1 on `#0a0a0a`, 8.5:1 on `#22222f`).
@@ -124,7 +126,8 @@ MAMO-Group-Landing/
   > Note: the built site now ships **dark** by default, which is the user's later decision (2026-10-14) and is consistent with the logo asset.
 
 ## Blind Spots to raise with the user (coach role)
-- **Testimonials tabs are cosmetic only**: `main.js` toggles `testimonial-active` but NEVER swaps the card content — clicking "Parents" still shows the 4 student cards. The client wants students AND parents. Needs a real content switch (or two card groups toggled by `hidden`).
+- **Testimonials tabs content switch — RESOLVED**: the two `.cards` groups (Parents / Students) are now toggled by `main.js` via `card.hidden`. The client wants students AND parents — now working.
+- **Testimonials tab wiring is still index-coupled** (see comment): it maps a tab to its card group by array index, not by a shared identifier (`data-tab` / `data-card`). It works fine for the current fixed ordering, but any reorder, insert, or future swap of the two groups will misalign them. Recommended future fix: give each tab and its card group a matching `data-tab` / `data-card` and wire by ID instead. This is cosmetic/organizational only — not blocking.
 - The 4 testimonial cards are identical duplicates (same "Ahmed S., Grade 8" + same quote) — placeholder only.
 - WhatsApp links all use the placeholder `201XXXXXXXXX` + the same prefilled text (fine until client handoff).
 - `#lang` only rewrites its own label; it does not switch language or direction. It is now `hidden` in `index.html` (2026-10-22), pending the React/RTL work.

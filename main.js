@@ -8,6 +8,7 @@ const langIcon = document.querySelector("#lang");
 const playIcon = document.querySelector("#play-button .fa-play");
 const playButton = document.querySelector("#play-button");
 const testimonialTabs = document.querySelectorAll("#testimonial-tabs button");
+const testimonialCards = document.querySelectorAll(".cards");
 const faq = document.querySelectorAll("#faq ul div");
 const faqPlus = document.querySelectorAll("#faq .fa-plus");
 const faqtext = document.querySelectorAll("#faq p");
@@ -129,16 +130,27 @@ playButton.addEventListener("click", () => {
   playIcon.classList.toggle("fa-pause");
 });
 
-// Start Testimonial tabs
-testimonialTabs.forEach((tab) => {
+// Start Testimonial
+// Switcher of tabs & cards
+testimonialTabs.forEach((tab, index) => {
   tab.addEventListener("click", () => {
+    //Tabs
     testimonialTabs.forEach((t) => {
       t.classList.remove("testimonial-active");
     });
+
     tab.classList.add("testimonial-active");
+
+    // cards
+    testimonialCards.forEach((card) => {
+      card.hidden = true;
+    });
+
+    testimonialCards[index].hidden = false;
   });
 });
-// End Testimonial tabs
+
+// End Testimonial
 
 // Start FAQ behaviour
 faq.forEach((ele, index) => {
