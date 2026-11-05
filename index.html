@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en"
+  class="dark scroll-smooth scrollbar-thumb-mamo-gold-deep dark:scrollbar-thumb-mamo-gold selection:bg-mamo-gold-deep dark:selection:bg-mamo-gold selection:text-mamo-white dark:selection:text-mamo-black">
 
 <head>
   <meta charset="UTF-8" />
@@ -22,15 +23,16 @@
   <header
     class="border-mamo-gold bg-mamo-white dark:bg-mamo-black sticky top-0 z-50 border-be-2 transition-all duration-300">
     <div
-      class="relative mx-auto flex h-15 max-w-93.75 items-center justify-between gap-7 px-5 md:max-w-191.25 lg:h-19 lg:max-w-250 lg:gap-5 xl:max-w-375 xl:px-15">
-      <a href="#" id="logo" class="mbe-0.8 me-auto hover:opacity-75 bg-mamo-black dark:bg-transparent rounded-lg p-1">
+      class="relative mx-auto flex h-15 max-w-93.75 items-center justify-between gap-4 px-5 md:max-w-191.25 lg:h-19 lg:max-w-250 lg:gap-5 xl:max-w-375 xl:px-15">
+      <a href="#" id="logo"
+        class="mbe-0.8 me-auto hover:opacity-75 bg-mamo-black dark:bg-transparent rounded-lg p-1 duration-300">
         <img src="./img/logo.svg" alt="mamo logo" class="w-15 lg:w-20" width="380" height="233" />
       </a>
 
       <nav
         class="bg-mamo-white lg:dark:bg-transparent dark:bg-mamo-black border-mamo-gold absolute top-full z-30 max-h-0 w-[calc(100%-40px)] mx-auto gap-2.5 overflow-hidden rounded-b-2xl border-x-2 border-be-2 px-5 font-bold transition-all duration-300 lg:static lg:top-auto lg:left-auto lg:z-0 lg:m-0 lg:me-5 lg:h-full lg:max-h-full lg:w-auto lg:translate-none lg:flex-row lg:rounded-b-none lg:border-none lg:bg-transparent lg:p-0">
         <ul
-          class="mbe-2 h-full w-full uppercase md:text-xl lg:me-10 lg:mbe-0 lg:flex lg:items-center lg:justify-end lg:gap-6 xl:gap-10">
+          class="mbe-2 h-full w-full uppercase md:text-lg xl:text-xl lg:flex lg:items-center lg:justify-end lg:gap-5 xl:gap-8">
           <li class="nav-link">
             <a href="#" class="nav-layout"><i class="fa-solid fa-house"></i>Home</a>
           </li>
@@ -51,11 +53,6 @@
           </li>
         </ul>
       </nav>
-      <button
-        class="hover:bg-mamo-gold/20 rounded-full p-2 text-mamo-gold-deep dark:text-mamo-gold text-lg font-bold hidden"
-        id="lang">
-        AR
-      </button>
       <button
         class="hover:bg-mamo-gold/20 rounded-full p-2 text-mamo-gold-deep dark:text-mamo-gold text-xl cursor-pointer"
         id="theme">
@@ -78,9 +75,9 @@
     <section class="from-mamo-gold/15 bg-linear-to-b to-transparent" id="hero">
       <div class="mamo-container grid items-center justify-items-center lg:grid-cols-2 lg:gap-5">
         <div
-          class=" border-mamo-gold shadow-mamo-gold/80 mbe-8 h-50 w-50 rounded-full border-3 shadow-lg transition-all duration-300 hover:scale-105 md:h-55 md:w-55 lg:mbs-8 lg:h-100 lg:w-100">
-          <img src="img/miss-mai-1.jpg" alt="Miss Mai" width="704" height="1472"
-            class="h-full w-full rounded-full object-cover object-top" />
+          class=" border-mamo-gold shadow-mamo-gold/80 mbe-8 h-50 w-50 rounded-full border-4 shadow-lg transition-all duration-300 hover:scale-105 md:h-55 md:w-55 lg:mbs-8 lg:h-100 lg:w-100">
+          <img src="./img/Mrs-Mai1.jpg" alt="Mrs Mai" width="597" height="1280"
+            class="h-full w-full rounded-full object-cover object-[0_37%] flex justify-center items-center text-xl" />
         </div>
 
         <div class="grid justify-items-center text-center">
@@ -110,27 +107,23 @@
     <!-- End Hero -->
     <!-- ٍStart About -->
     <section id="about">
-      <div class=" mamo-container grid items-center justify-items-center lg:grid-cols-2 xl:gap-x-8">
-        <div class="relative mx-auto mbe-8 w-full rounded-2xl bg-[#202032] lg:mbe-0 xl:row-span-2">
-          <button id="play-button"
-            class="text-mamo-gold bg-mamo-gold/20 absolute top-1/2 left-1/2 z-10 flex h-14 w-14 -translate-1/2 cursor-pointer items-center justify-center rounded-full text-2xl hover:scale-110">
-            <i class="fa-solid fa-play"></i>
-          </button>
-          <video src="" class="aspect-video w-full rounded-2xl"></video>
-        </div>
+      <div class="mamo-container grid items-center justify-items-center lg:grid-cols-2 gap-6">
+        <h2 class="section-title"><i class="fa-solid fa-circle-user justify-self-start"></i>About Ms. Mai Elnaggar</h2>
+        <video class="rounded-2xl relative mbe-8 h-100 lg:my-0 lg:row-start-1 lg:row-span-3 aspect-video" controls
+          controlsList="nodownload" disablepictureinpicture>
+          <source src="./Video/video.mp4">
+        </video>
 
-        <div class="text-center lg:max-w-[90%]">
-          <h2 class="section-title"><i class="fa-solid fa-circle-user"></i>About Ms. Mai Elnaggar</h2>
-          <p class="mbs-8 mbe-6 text-sm leading-[1.7] text-gray-600 dark:text-gray-400 lg:mbe-0 lg:text-base">
-            With over 30 years of teaching experience at Narmer Language
-            School, Ms. Mamo specializes in Science for primary and
-            preparatory students, and Biology for secondary students. She is
-            also a certified coach
-          </p>
-        </div>
+        <p
+          class="text-sm leading-[1.7] text-gray-600 dark:text-gray-400 lg:mbe-0 lg:text-base text-center md:max-w-[70%] lg:max-w-[90%] xl:max-w-[70%]">
+          With over 30 years of teaching experience at Narmer Language
+          School, Ms. Mamo specializes in Science for primary and
+          preparatory students, and Biology for secondary students. She is
+          also a certified coach
+        </p>
 
         <div
-          class="grid grid-cols-2 gap-3 text-center text-gray-600 dark:text-gray-400 md:grid-cols-4 md:grid-rows-1 lg:col-span-2 lg:mbs-5 lg:w-full lg:gap-10 xl:col-span-1 xl:gap-3">
+          class="grid grid-cols-2 gap-3 text-center text-gray-600 dark:text-gray-400 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 lg:mbs-5 lg:gap-3">
           <div class="about-card">
             <i class="fa-solid fa-calendar about-card-icon"></i>
             <h2 class="about-card-number">30+</h2>
@@ -317,154 +310,154 @@
             Students
           </button>
         </div>
-          <div class="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 xl:grid-cols-4 cards">
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Parent · Grade 8</span>
-              </h3>
+        <div class="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 xl:grid-cols-4 cards">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
             </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Parent · Grade 8</span>
-              </h3>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Parent · Grade 8</span>
-              </h3>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Parent · Grade 8</span>
-              </h3>
-            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Parent · Grade 8</span>
+            </h3>
           </div>
-          <div hidden class="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 xl:grid-cols-4 cards">
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Student · Grade 8</span>
-              </h3>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
             </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Student · Grade 8</span>
-              </h3>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Student · Grade 8</span>
-              </h3>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <!-- Stars for test -->
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Ms. Mamo made science so fun and easy to understand. My grades
-                improved a lot!"
-              </p>
-              <h3 class="testimonial-person">
-                Ahmed S.
-                <span class="testimonial-detail">Student · Grade 8</span>
-              </h3>
-            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Parent · Grade 8</span>
+            </h3>
           </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Parent · Grade 8</span>
+            </h3>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Parent · Grade 8</span>
+            </h3>
+          </div>
+        </div>
+        <div hidden class="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 xl:grid-cols-4 cards">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Student · Grade 8</span>
+            </h3>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Student · Grade 8</span>
+            </h3>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Student · Grade 8</span>
+            </h3>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <!-- Stars for test -->
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Ms. Mamo made science so fun and easy to understand. My grades
+              improved a lot!"
+            </p>
+            <h3 class="testimonial-person">
+              Ahmed S.
+              <span class="testimonial-detail">Student · Grade 8</span>
+            </h3>
+          </div>
+        </div>
       </div>
     </section>
     <!-- End Testimonial -->
@@ -548,7 +541,7 @@
   <!-- Start Footer -->
   <footer>
     <div
-      class="md:grid-cols-3 md:justify-items-center mx-auto max-w-93.75 border-t border-mamo-black/10 dark:border-white/10 px-5 py-6 md:grid md:max-w-191.25 lg:max-w-250 xl:max-w-375 xl:px-15 xl:pbs-10">
+      class="md:grid-cols-3 md:justify-items-center mx-auto max-w-93.75 px-5 py-6 md:grid md:max-w-191.25 lg:max-w-250 xl:max-w-375 xl:px-15 xl:pbs-10">
       <a class="mbe-10" href="#">
         <img src="./img/logo.svg" alt="mamo logo"
           class="w-15 hover:opacity-75 lg:w-20 bg-mamo-black rounded-lg p-1 dark:bg-transparent" width="380"
@@ -591,14 +584,13 @@
         class="col-span-3 justify-self-stretch border-t border-mamo-black/10 dark:border-white/10 text-center text-xs text-gray-500 dark:text-gray-400">
         <div class="mbe-3 pbs-6">© 2026 MAMO Group. All rights reserved.</div>
         <div>
-          Made with <i class="fa-solid fa-heart text-red-500"></i> by Yousef
-          Khaled
+          Made with ♥️ by Yousef Khaled
         </div>
       </div>
     </div>
   </footer>
   <!-- End Footer -->
-  <script src="main.js"></script>
+  <script src="./main.js"></script>
 </body>
 
 </html>

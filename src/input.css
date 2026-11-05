@@ -2,6 +2,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@custom-variant hover (&:hover);
+
 @theme {
   --color-mamo-gold: #d4af37;
   --color-mamo-gold-deep: #74570a;
@@ -12,7 +14,7 @@
 }
 
 .mamo-container {
-  @apply mx-auto max-w-93.75 px-5 py-16 md:max-w-191.25 lg:max-w-250 xl:max-w-375 xl:px-15 xl:py-24;
+  @apply mx-auto max-w-93.75 px-5 py-16 md:max-w-191.25 lg:max-w-250 xl:max-w-375 xl:px-15 xl:py-24 border-b border-mamo-black/10 dark:border-white/10;
 }
 
 .section-title {
@@ -21,7 +23,7 @@
 
 /* Header */
 .nav-link {
-  @apply hover:text-mamo-gold-deep dark:hover:text-mamo-gold lg:hover:border-mamo-gold border-b py-3.5 transition-all duration-300 hover:ps-3 md:py-3 lg:flex lg:h-full lg:items-center lg:border-b-3 lg:border-transparent lg:p-0 lg:hover:p-0 text-mamo-black dark:text-mamo-white;
+  @apply hover:text-mamo-gold-deep dark:hover:text-mamo-gold lg:hover:border-mamo-gold border-b py-3.5 transition-all duration-300 hover:ps-5 md:py-3 lg:flex lg:h-full lg:items-center lg:border-b-3 lg:border-transparent lg:hover:p-0 text-mamo-black dark:text-mamo-white;
 }
 
 .nav-layout {

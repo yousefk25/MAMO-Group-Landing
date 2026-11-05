@@ -1,29 +1,55 @@
 # Session Memory — MAMO Group Landing Page
 
 ## Current State
-All 9 sections are built; the light/dark theme, the hover + icon pass, the mobile-menu interaction update, and the testimonial content switch are committed. The site is feature-complete for the English-first release. What is left is content, then the React migration — no more feature work in this static HTML version.
+All 9 sections are built. The About section now plays a real, self-hosted intro video with native controls, and the hero/profile photos were replaced with the final Mrs. Mai images. The same working tree carries a section-divider + scroll/selection polish pass, the removal of the dead language button, and a Prettier reformat. The site is feature-complete for the English-first release — what is left is content, then the React migration.
 
-- **HEAD:** `54a996d feat: close mobile menu on outside click and scroll`.
-- **Uncommitted working tree:** only `.gitignore` (adds `.claude/`). `src/output.css` is byte-identical to a fresh `npm run build` (60,283 bytes), so nothing is waiting to be generated or staged.
+- **HEAD:** `9dd60d4 feat: switch testimonial cards between parents and students`.
+- **Ready to commit (working tree):** `index.html`, `main.js`, `src/input.css`, `src/output.css`, plus untracked `Video/video.mp4` (9.5 MB), `img/Mrs-Mai.jpg`, `img/Mrs-Mai1.jpg`. `src/output.css` was rebuilt and is byte-identical to a fresh `npm run build` (60,318 bytes — it grew because `memory.md` prose is scanned too, see Known issues).
+- **Suggested commit title:** `feat: add real intro video, section dividers and scroll polish`.
 - **Tracked and committed:** `DESIGN.md` and `.impeccable/config.json` (both landed in `20f2442`).
-- **Ignored:** `.impeccable/design.json`, `.impeccable/live/`, `.impeccable/critique/` — listed individually in `.gitignore`.
+- **Ignored:** `.impeccable/design.json`, `.impeccable/live/`, `.impeccable/critique/`, `.claude/`, `/.memory` — listed individually in `.gitignore`.
 - **Branch:** `main`.
 
 ## Latest Commit
-- `54a996d feat: close mobile menu on outside click and scroll` — the menu now closes on an outside click and on scroll.
-- Before that: `4751d59 feat: add hover states, nav icons and combined footer grid` — hover feedback, navigation icons, and the final footer grid; `20f2442 feat: add light/dark theme with saved preference` — the theme pass.
-- **Not yet committed (this session):** testimonial content switch — `index.html` now holds two `.cards` groups (Parents visible, Students `hidden`); `main.js` maps each tab to its group via `index` and swaps visibility; the stray blank line in `src/input.css` was removed and `output.css` rebuilt. Suggested commit title: `feat: switch testimonial cards between parents and students`.
+- `9dd60d4 feat: switch testimonial cards between parents and students` — the Parents / Students `.cards` groups swap by tab index.
+- Before that: `54a996d feat: close mobile menu on outside click and scroll`; `4751d59 feat: add hover states, nav icons and combined footer grid`; `20f2442 feat: add light/dark theme with saved preference`.
+- **Not yet committed (2026-11-05 session):** see "Session 2026-11-05" below.
+
+## Session 2026-11-05 — Real video, assets and polish
+
+### What changed
+- **About section rebuilt around a real video.** The fake `<video src="">` + JS play/pause toggle is gone. There is now one `<video controls controlsList="nodownload" disablepictureinpicture>` with `<source src="./Video/video.mp4">` (relative — the user fixed the root-absolute path the same session). The `section-title` became a direct grid child instead of sitting inside a wrapper, so the grid is `h2 → video → paragraph → stat cards` and the video spans 3 rows on `lg`.
+- **Real photos.** Hero uses `img/Mrs-Mai1.jpg` (`597×1280`, `object-[0_37%]`); `img/Mrs-Mai.jpg` was added for the profile. Both `miss-mai*.jpg` files are now unreferenced but still tracked.
+- **Language button deleted.** `#lang` is gone from `index.html` *and* its click handler is gone from `main.js` ("Start Dark Theme" comment duplicated as "Start Dark Dark Theme" and the trailing "// Start Dark Theme" were also fixed to `// End Dark Theme`).
+- **Section dividers.** `.mamo-container` now carries `border-b border-mamo-black/10 dark:border-white/10`, so every section is separated by one rule. The footer's own `border-t` was deleted to avoid a double line.
+- **Scroll / selection polish.** `<html>` gained `scroll-smooth`, gold `selection:` colours (`selection:bg-mamo-gold-deep dark:selection:bg-mamo-gold` + inverse text), and `scrollbar-thumb-*` classes that currently do nothing (see Known issues).
+- **Nav / header spacing.** Header `gap-7 → gap-4`; nav `md:text-xl → md:text-lg xl:text-xl`; `lg:gap-6 → lg:gap-5`, `xl:gap-10 → xl:gap-8`; `.nav-link` hover indent `hover:ps-3 → hover:ps-5`; logo link got `duration-300`.
+- **Footer credit** is now plain `Made with ♥️ by Yousef Khaled` (the `fa-heart text-red-500` icon is what kept `--color-red-500` in the bundle).
+- **Prettier reformat** across `index.html` — this is why `git diff` shows ~330 lines while `git diff -w` shows ~46.
+
+### Known issues introduced (none blocking)
+- ~~**`#play-button` is dead markup** sitting inside `<video>`~~ / ~~**video path is root-absolute** (`/Video/video.mp4`)~~ → **both fixed by the user in the same session**: the button is gone, the source is `./Video/video.mp4`, and `main.js` / the stylesheet links are relative too.
+- **Tailwind scans the Markdown docs.** `memory.md` and `AGENTS.md` are picked up by the automatic source detection, so any class-like string in prose lands in the bundle — `.gap-7` and `.text-red-500` are in `output.css` today purely because someone wrote them in a sentence. Harmless but it makes `output.css` change whenever the docs are edited. Fix when convenient: `@source not "./memory.md";` and `@source not "./AGENTS.md";` in `src/input.css`.
+- ~~**`scrollbar-thumb-*` classes are silently dropped**~~ → **wrong, corrected 2026-11-05.** Tailwind v4.3 ships `scrollbar-color` utilities **built in** (no plugin). Verified live in Chromium 152: computed `scrollbar-color` on `<html>` is `rgb(212, 175, 55) rgba(0, 0, 0, 0)` in dark and `rgb(116, 87, 10) …` in light. **The catch is the track:** `--tw-scrollbar-track` defaults to `#0000`, so only the thumb is painted — the scrollbar looks unchanged until the thumb is visible, which is why it reads as "not working". There is no `scrollbar-width` class in use, so the scrollbar stays full width.
+  - **Why it "looks" broken:** only the thumb changes, and on platforms with overlay scrollbars (Linux/macOS) the bar is thin and fades out when idle.
+  - **The real trap:** `scrollbar-color` is an *inherited* property, and MDN is explicit that browsers ignore every `::-webkit-scrollbar-*` pseudo-element on any element whose computed `scrollbar-color` is not `auto`. So while these classes are on `<html>`, hand-written `::-webkit-scrollbar` styling anywhere in the page is dead too. Use one approach or the other.
+  - **Support:** Baseline 2025 (Chrome/Edge 121+, Firefox 64+, Safari only from late 2025). Older Safari silently keeps the native scrollbar.
+- **`h-100` + `aspect-video` on the video fight each other** — a fixed height wins, so the 16:9 ratio only holds at one width. Prefer `w-full` + `aspect-video` and drop `h-100`.
+- **`@custom-variant hover (&:hover)` redefines the built-in `hover` variant.** Tailwind's default gates hover behind `@media (hover: hover)`; this override removes the gate, so hover styles now fire and stick after a tap on touch devices.
+- The `img` in the hero also carries `flex justify-center items-center text-xl`, which do nothing on a replaced element. Harmless, but noise.
 
 ## Next Step (exact starting point)
-1. Show Ms. Mai the full site and lock the mock content (prices, grade wording, WhatsApp number and prefilled text, phone).
+1. Show Ms. Mai the full site — now including her real intro video and photos — and lock the mock content (prices, grade wording, WhatsApp number and prefilled text, phone).
 2. **Move to React.** Arabic + RTL are deliberately deferred to that migration (see Decisions Log). No further feature work in the HTML version.
 
 ## PENDING (blocking none)
 - Finalize ALL mock content with Ms. Mai after she sees the full site.
+- Decide whether the 9.5 MB `Video/video.mp4` ships as-is or gets compressed before the first deploy with it.
+- Delete the unreferenced `img/miss-mai.jpg` / `img/miss-mai-1.jpg` (needs the user's OK — tracked files).
 
 ## Deferred to the React migration (2026-10-22)
 - **Arabic + RTL.** Not built in this static HTML version. Every `ps/pe/ms/me` and every directional icon would have to be mirrored by hand here and then rebuilt again in React — cheaper to do it once, there. This includes flipping `fa-arrow-right` → `fa-arrow-left`.
-- The `#lang` button is `hidden` in `index.html`. `main.js` still binds it; the element exists, so the listener is dead but harmless.
+- The `#lang` button and its `main.js` listener were **deleted entirely on 2026-11-05** — there is no language toggle in the build at all. When React lands, the language switch gets written there for the first time, not resurrected from here.
 
 ## Hover Implementation Check — resolved (2026-10-22)
 - ~~**Build blocker:** `.faq-question` uses the `group` marker inside `@apply` → `Cannot apply unknown utility class 'group'`~~ → **resolved**: the marker lives on `.faq-header` in `index.html` and its children use `group-hover:`. `npm run build` passes.
@@ -33,13 +59,14 @@ All 9 sections are built; the light/dark theme, the hover + icon pass, the mobil
 ## Project Structure (current)
 ```
 MAMO-Group-Landing/
-├── index.html              (603 lines, all 9 sections)
-├── main.js                 (177 lines — burger nav with outside-click/scroll close, theme + persistence, lang, video play, testimonial tabs, FAQ accordion)
+├── index.html              (595 lines, all 9 sections — Prettier-formatted 2026-11-05)
+├── main.js                 (160 lines — burger nav with outside-click/scroll close, theme + persistence, testimonial tabs, FAQ accordion)
 ├── src/
-│   ├── input.css           (188 lines — @theme tokens, @custom-variant dark, @apply component classes, @font-face)
+│   ├── input.css           (190 lines — @theme tokens, @custom-variant dark, @custom-variant hover, @apply component classes, @font-face)
 │   ├── all.min.css         (Font Awesome, local)
 │   └── output.css          (generated, TRACKED on purpose — run `npm run build` after any class change)
-├── img/                    (logo.svg, logo.jpg, miss-mai.jpg, miss-mai-1.jpg)
+├── Video/                  (video.mp4, 9.5 MB — the About intro video, referenced as /Video/video.mp4)
+├── img/                    (logo.svg, logo.jpg, Mrs-Mai.jpg, Mrs-Mai1.jpg; miss-mai.jpg + miss-mai-1.jpg are unreferenced)
 ├── fonts/                  (self-hosted Poppins woff2)
 ├── webfonts/               (Font Awesome files)
 ├── AGENTS.md               (project instructions)
@@ -66,6 +93,7 @@ MAMO-Group-Landing/
 - `--color-mamo-faq` was **removed** — it named a section, not a role. FAQ dividers now use `border-mamo-black/10 dark:border-white/10`.
 - **Rule:** `mamo-gold` is never used as ink on a light surface. That is what `mamo-gold-deep` exists for; breaking it drops text to ~2:1.
 - `--font-poppins` — self-hosted woff2 (400/600/700).
+- **Selection colours (2026-11-05)** follow the gold rule on `<html>`: `selection:bg-mamo-gold-deep dark:selection:bg-mamo-gold`, with inverted text (`selection:text-mamo-white dark:selection:text-mamo-black`).
 - Container pattern: `max-w-93.75 px-5` / `md:max-w-191.25` / `lg:max-w-250` / `xl:max-w-375` / `xl:px-15` — repeated in every section (final refactor pending).
 - Type rule agreed: use Tailwind scale names where a size exists; keep arbitrary px ONLY for non-scale sizes (28/32/40/56); icons are the legit arbitrary exception.
 
@@ -87,6 +115,9 @@ MAMO-Group-Landing/
 - **Unlayered `@apply` rules beat inline utilities.** A colour set inside a custom class in `input.css` cannot be overridden by a class on the element — so set any given colour in exactly one place.
 - **Arabic + RTL are deferred to the React migration (2026-10-22).** Not built in the static HTML version. Directional logic gets written once, in React, instead of twice by hand.
 - **`color-scheme` was considered and declined (2026-10-22).** The native scrollbar stays light next to the dark page. No form controls exist yet, so the practical cost is that scrollbar only. Do not re-raise it as a pending item.
+- **`hover` is redefined (2026-11-05):** `@custom-variant hover (&:hover)` replaces Tailwind's `@media (hover: hover)`-gated variant, so hover styles apply on touch devices too. Chosen for consistency on desktop; the cost is that the hover state sticks after a tap. Don't move essential information into `hover:` only.
+- **`.mamo-container` owns the section divider (2026-11-05).** The bottom rule lives in the class (`border-b border-mamo-black/10 dark:border-white/10`), so a new section gets its divider for free and no section should add its own `border-t` (the footer's was removed for exactly this reason).
+- **The intro video is a local file, not an embed (2026-11-05).** `Video/video.mp4` with native `controls`, `controlsList="nodownload"`, `disablepictureinpicture` — no YouTube/Vimeo, no JS player. Keeps the page dependency-free.
 
 ## FAQ Accordion — How It Works
 - **Selector:** `#faq ul div` (click on the header `<div>` only, NOT `<li>` — so clicking an answer `<p>` doesn't trigger the toggle).
@@ -130,7 +161,7 @@ MAMO-Group-Landing/
 - **Testimonials tab wiring is still index-coupled** (see comment): it maps a tab to its card group by array index, not by a shared identifier (`data-tab` / `data-card`). It works fine for the current fixed ordering, but any reorder, insert, or future swap of the two groups will misalign them. Recommended future fix: give each tab and its card group a matching `data-tab` / `data-card` and wire by ID instead. This is cosmetic/organizational only — not blocking.
 - The 4 testimonial cards are identical duplicates (same "Ahmed S., Grade 8" + same quote) — placeholder only.
 - WhatsApp links all use the placeholder `201XXXXXXXXX` + the same prefilled text (fine until client handoff).
-- `#lang` only rewrites its own label; it does not switch language or direction. It is now `hidden` in `index.html` (2026-10-22), pending the React/RTL work.
+- ~~`#lang` only rewrites its own label; it does not switch language or direction.~~ → **resolved 2026-11-05**: the button and its JS were removed. Language switching no longer exists in the static build; it is React-only work now.
 
 ## Production-Readiness Audit
 - `AUDIT.md` (created 2026-09-17) is **no longer in the repo**. If the user says "رجّعني للـ audit", say the file is gone and offer to rebuild a priority list from the current source instead of pretending to resume it.

@@ -4,9 +4,6 @@ const nav = document.querySelector("nav");
 const links = document.querySelectorAll("nav li a");
 const themeBtn = document.querySelector("#theme");
 const themeIcon = document.querySelector("#theme i");
-const langIcon = document.querySelector("#lang");
-const playIcon = document.querySelector("#play-button .fa-play");
-const playButton = document.querySelector("#play-button");
 const testimonialTabs = document.querySelectorAll("#testimonial-tabs button");
 const testimonialCards = document.querySelectorAll(".cards");
 const faq = document.querySelectorAll("#faq ul div");
@@ -100,7 +97,7 @@ window.addEventListener("scroll", () => {
 });
 // End Nav Menu
 
-// Start Dark Dark Theme
+// Start Dark Theme
 if (localStorage.getItem("theme") === "light") {
   themeIcon.classList.toggle("fa-sun");
   themeIcon.classList.toggle("fa-moon");
@@ -115,20 +112,7 @@ themeBtn.addEventListener("click", () => {
     ? localStorage.setItem("theme", "dark")
     : localStorage.setItem("theme", "light");
 });
-// Start Dark Theme
-
-// Language button
-langIcon.addEventListener("click", () => {
-  langIcon.innerText === "EN"
-    ? (langIcon.innerText = "AR")
-    : (langIcon.innerText = "EN");
-});
-
-// Video buton
-playButton.addEventListener("click", () => {
-  playIcon.classList.toggle("fa-play");
-  playIcon.classList.toggle("fa-pause");
-});
+// End Dark Theme
 
 // Start Testimonial
 // Switcher of tabs & cards
@@ -149,7 +133,6 @@ testimonialTabs.forEach((tab, index) => {
     testimonialCards[index].hidden = false;
   });
 });
-
 // End Testimonial
 
 // Start FAQ behaviour
